@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Add Movie</title>
+</head>
+<body>
+    <h1>Add Movie</h1>
+    
+    <form th:action="@{/logout}" method="post">
+        <div><input type="submit" value="Logout" class="btn btn-danger"/></div>
+    </form>
+    <br>
+    <form th:object="${movie}" th:action="@{save}" action="#" method="post">
+		<div>
+			<label>Name:</label>
+        	<input type="text" th:field= "*{name}"/>
+        	<div th:if="${#fields.hasErrors('name')} "th:errors="*{name}">Error</div>
+        </div>
+        
+        <div>
+			<label>Director:</label>
+        	<input type="text" th:field= "*{director}"/>
+        	<div th:if="${#fields.hasErrors('director')} "th:errors="*{director}">Error</div>
+        </div>
+        	
+        <div>
+			<label>Publication year:</label>
+        	<input type="number" th:field= "*{pubyear}"/>
+        	<div th:if="${#fields.hasErrors('pubyear')} "th:errors="*{pubyear}">Error</div>
+        </div>
+        
+        <div>
+			<label>Length:</label>
+        	<input type="number" th:field= "*{length}"/>	
+      		<div th:if="${#fields.hasErrors('length')} "th:errors="*{length}">Error</div>
+        </div>
+      		
+      	<div>
+			<label>Rating:</label>
+        	<input type="number" th:field= "*{rating}"/>
+        	<div th:if="${#fields.hasErrors('rating')} "th:errors="*{rating}">Error</div>
+      	</div>
+      	<br>
+
+		<div>
+        <label for="categorylist">Category:</label>
+        <select id="categorylist" th:field="*{category}" class="form-control">
+            <option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+        </select>
+        </div>
+        <br>
+        
+        
+        <button type="submit">Add Movie</button>
+    </form>
+</body>
+</html>
